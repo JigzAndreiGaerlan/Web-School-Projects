@@ -1,0 +1,178 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input-Process-Output (IPO)</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+          sans-serif;
+        width: 100%;
+        height: 100%;
+      }
+      .mainContainer {
+        display: flex;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        gap: 5vw;
+        border-bottom: 2px solid #000;
+      }
+
+      input {
+        height: 5vh;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid #000;
+        margin: 0;
+        padding: 0;
+        width: 50%;
+      }
+
+      h1 {
+        text-transform: uppercase;
+        font-size: 2vw;
+        margin: 0;
+        padding: 0;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      }
+
+      .toAddContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      #firstNameInput,
+      #lastNameInput {
+        width: 10%;
+      }
+
+      button {
+        border: 1px solid #000;
+        background-color: #fff;
+        padding: 5px 20px;
+        border-radius: 10px;
+        margin: 5px;
+        transition: transform 0.3s;
+      }
+
+      button:active {
+        transform: scale(0.3);
+        background-image: linear-gradient(
+          to top left,
+          rgb(139, 0, 173),
+          rgb(248, 0, 174)
+        );
+      }
+
+      .itemsContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .searchCon {
+        width: 100%;
+        border-bottom: 1px solid #000;
+        margin-top: 20vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mainContainer">
+      <h1>Input Process Output</h1>
+      <input
+        type="search"
+        name="search"
+        id="searchInput"
+        placeholder="Search.."
+      />
+      <button type="button" id="searchBtn">Search</button>
+    </div>
+    <div class="toAddContainer">
+      <input
+        type="text"
+        name="firstname"
+        id="firstNameInput"
+        placeholder="First Name"
+      />
+      <input
+        type="text"
+        name="lastname"
+        id="lastNameInput"
+        placeholder="Last name"
+      />
+      <button type="button" id="addBtn">Add</button>
+    </div>
+    <div class="searchCon">
+      <h1
+        style="
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+            sans-serif;
+          font-size: 1.5vw;
+        "
+      >
+        Search Output:
+      </h1>
+      <div id="searchOutput">
+        <p id="theOutput"></p>
+      </div>
+    </div>
+    <div class="itemsContainer">
+      <ul id="itemOutputContainer"></ul>
+    </div>
+    <script>
+      const addBtn = document.getElementById('addBtn');
+      const firstNameInput = document.getElementById('firstNameInput');
+      const lastNameInput = document.getElementById('lastNameInput');
+      const itemOutputContainer = document.getElementById(
+        'itemOutputContainer',
+      );
+
+      function forName() {
+        const firstNameInputValue = firstNameInput.value;
+        const lastNameInputValue = lastNameInput.value;
+
+        firstNameInput.value = '';
+        lastNameInput.value = '';
+        const items = document.createElement('li');
+        items.style.listStyleType = 'none';
+        items.classList.add = `${firstNameInput}`;
+        items.innerHTML = `<strong>First Name:</strong> ${firstNameInputValue} &nbsp;&nbsp;&nbsp; <strong>Last Name:</strong> ${lastNameInputValue}`;
+
+        itemOutputContainer.appendChild(items);
+
+        const searchBtn = document.getElementById('searchBtn');
+
+        const searchInput = document.getElementById('searchInput');
+
+        const forSearch = () => {
+          const searchInputValue = searchInput.value;
+          const searchOutput = document.getElementById('searchOutput');
+          const forOutput = document.getElementById('theOutput');
+
+          if (
+            searchInputValue === firstNameInputValue ||
+            searchInputValue === lastNameInputValue
+          ) {
+            forOutput.innerHTML = `<strong>First Name:</strong> ${firstNameInputValue} &nbsp;&nbsp;&nbsp; <strong>Last Name:</strong> ${lastNameInputValue}`;
+            searchOutput.appendChild(forOutput);
+          } else if (searchInputValue === firstNameInputValue) {
+            forOutput.innerHTML = `<strong>First Name:</strong> ${firstNameInputValue} &nbsp;&nbsp;&nbsp; <strong>Last Name:</strong> ${lastNameInputValue}`;
+          } else if (searchInputValue === lastNameInputValue) {
+            forOutput.innerHTML = `<strong>First Name:</strong> ${firstNameInputValue} &nbsp;&nbsp;&nbsp; <strong>Last Name:</strong> ${lastNameInputValue}`;
+          }
+        };
+
+        searchBtn.addEventListener('click', forSearch);
+      }
+
+      addBtn.addEventListener('click', forName);
+    </script>
+  </body>
+</html>
